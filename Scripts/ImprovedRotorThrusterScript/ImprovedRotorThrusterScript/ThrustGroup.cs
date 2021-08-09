@@ -24,7 +24,7 @@ namespace IngameScript
     {
         public sealed class ThrustGroup : IDisposable
         {
-            private const int SlidingAverageBufferSize = 20;
+            private const int SlidingAverageBufferSize = 5;
             private readonly HashSet<IMyThrust> _thrusters = new HashSet<IMyThrust>();
             private bool _dirty;
             private readonly IDisposable _subscription;
@@ -96,7 +96,6 @@ namespace IngameScript
 
                 if (wasRemoved)
                 {
-                    //_gridMaxThrust -= GetMaxThrust(thruster) * thruster.ThrustMatrix().Forward.ToBodyDirection(Grid.WorldMatrix);
                     _dirty = true;
                     thruster.ThrustOverridePercentage = 0;
                 }
@@ -113,6 +112,8 @@ namespace IngameScript
                 foreach (var thruster in _thrusters)
                     thruster.ThrustOverride = 0;
             }
+
+            public Base6Directions.Direction Direction => Base6Directions.GetOppositeDirection(_thrusters.FirstElement().Orientation.Forward);
 
             private static IRxObservable<float> SlidingAverage(IRxObservable<float> source, int count)
             {
