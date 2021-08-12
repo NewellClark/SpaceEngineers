@@ -85,8 +85,16 @@ namespace IngameScript
                 var nacelles = _thrustGroupProvider.GetNacelles();
                 var worldDampVelocity = Vector3D.TransformNormal(dampVelocity, shipController.WorldMatrix);
 
-                foreach (var nacelle in nacelles)
-                    nacelle.RotateTowards(worldDampVelocity);
+                if (RoundDownAlmostZeroComponents(worldDampVelocity, Tolerance) != Vector3D.Zero)
+                {
+                    foreach (var nacelle in nacelles)
+                        nacelle.RotateTowards(worldDampVelocity);
+                }
+                else
+                {
+                    foreach (var nacelle in nacelles)
+                        nacelle.TargetVelocityRpm = 0;
+                }
 
                 ApplyThrust(shipController, thrustGroups, dampVelocity);
             }
