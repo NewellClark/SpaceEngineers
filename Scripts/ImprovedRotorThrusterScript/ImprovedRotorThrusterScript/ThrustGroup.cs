@@ -24,7 +24,7 @@ namespace IngameScript
     {
         public sealed class ThrustGroup : IDisposable
         {
-            private const int SlidingAverageBufferSize = 20;
+            private const int SlidingAverageWindowSize = 20;
             private readonly HashSet<IMyThrust> _thrusters = new HashSet<IMyThrust>();
             private bool _dirty;
             private readonly IDisposable _subscription;
@@ -37,7 +37,7 @@ namespace IngameScript
             public ThrustGroup(IMyCubeGrid grid, IRxObservable<UpdateEvent> updates)
             {
                 Grid = grid;
-                _subscription = SlidingAverage(updates.Select(x => ThrustOverridePercentage), SlidingAverageBufferSize)
+                _subscription = updates.Select(x => ThrustOverridePercentage).SlidingAverage(SlidingAverageWindowSize)
                     .Subscribe(x =>
                     {
                         UpdateThrustOverridePercentage(x);
@@ -96,7 +96,6 @@ namespace IngameScript
 
                 if (wasRemoved)
                 {
-                    //_gridMaxThrust -= GetMaxThrust(thruster) * thruster.ThrustMatrix().Forward.ToBodyDirection(Grid.WorldMatrix);
                     _dirty = true;
                     thruster.ThrustOverridePercentage = 0;
                 }
@@ -112,23 +111,6 @@ namespace IngameScript
 
                 foreach (var thruster in _thrusters)
                     thruster.ThrustOverride = 0;
-            }
-
-            private static IRxObservable<float> SlidingAverage(IRxObservable<float> source, int count)
-            {
-                float[] ringBuffer = new float[count];
-                float total = 0f;
-                int currentIndex = 0;
-
-                return source.Select(latestValue =>
-                {
-                    total -= ringBuffer[currentIndex];
-                    total += latestValue;
-                    ringBuffer[currentIndex] = latestValue;
-                    currentIndex = (currentIndex + 1) % count;
-
-                    return total / count;
-                });
             }
         }
     }

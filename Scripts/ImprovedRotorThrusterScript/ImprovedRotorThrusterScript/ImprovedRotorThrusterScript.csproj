@@ -58,6 +58,7 @@
   <Import Project="MDK/MDK.paths.props" Condition="exists('MDK/MDK.paths.props')" />
   <ItemGroup>
     <Compile Include="CommandNames.cs" />
+    <Compile Include="ObservableExtensions.cs" />
     <Compile Include="Providers\ThrustGroupProvider.cs" />
     <Compile Include="Providers\FlightDeckProvider.cs" />
     <Compile Include="MDK\Bootstrapper.cs" />
@@ -74,7 +75,7 @@
     <AdditionalFiles Include="MDK\whitelist.cache" />
     <Compile Include="ThrustControllerComponent.cs" />
     <Compile Include="ThrustGroup.cs" />
-    <Compile Include="Providers\NacelleProvider.cs" />
+    <Compile Include="Providers\SubgridAndBase6Direction.cs" />
     <Compile Include="VectorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

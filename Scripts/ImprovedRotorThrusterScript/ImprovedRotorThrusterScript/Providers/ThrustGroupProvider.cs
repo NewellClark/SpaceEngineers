@@ -59,7 +59,7 @@ namespace IngameScript
                 foreach (var thrustGroup in _thrustGroups.Values)
                     thrustGroup.Dispose();
                 foreach (var nacelle in _nacelleLookup.Values)
-                    nacelle.TargetVelocityRpm = 0;
+                    nacelle.Dispose();
             }
 
             private void OnUpdate(UpdateEvent e)
@@ -124,7 +124,7 @@ namespace IngameScript
                             Nacelle nacelle;
                             if (!_nacelleLookup.TryGetValue(thruster.CubeGrid, out nacelle))
                             {
-                                nacelle = new Nacelle(rotor);
+                                nacelle = new Nacelle(rotor, _updates);
                                 _nacelleLookup.Add(thruster.CubeGrid, nacelle);
                             }
 
@@ -157,7 +157,7 @@ namespace IngameScript
                                 if (nacelle.IsEmpty)
                                 {
                                     _nacelleLookup.Remove(group.Grid);
-                                    nacelle.TargetVelocityRpm = 0;
+                                    nacelle.Dispose();
                                 }
                             }
 

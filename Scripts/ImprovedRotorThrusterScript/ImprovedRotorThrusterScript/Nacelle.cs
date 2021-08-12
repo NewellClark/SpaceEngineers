@@ -22,14 +22,18 @@ namespace IngameScript
 {
     partial class Program
     {
-        public sealed class Nacelle
+        public sealed class Nacelle : IDisposable
         {
+            private const int SlidingAverageWindow = 10;
             private readonly HashSet<ThrustGroup> _thrustGroups = new HashSet<ThrustGroup>();
             private readonly IMyMotorStator _rotor;
+            private readonly IDisposable _subscription;
 
-            public Nacelle(IMyMotorStator rotor)
+            public Nacelle(IMyMotorStator rotor, IRxObservable<UpdateEvent> updates)
             {
                 _rotor = rotor;
+                _subscription = updates.Select(x => TargetVelocityRpm).SlidingAverage(SlidingAverageWindow)
+                    .Subscribe(x => _rotor.TargetVelocityRPM = x);
             }
 
             public void RotateTowards(Vector3D worldDirection)
@@ -43,7 +47,7 @@ namespace IngameScript
                 var angle = Vector3D.Cross(Vector3D.Normalize(worldDirection), Vector3D.Normalize(thrustGroup.MaxThrust));
                 double error = angle.Dot(_rotor.WorldMatrix.Up);
 
-                _rotor.TargetVelocityRPM = (float)(error * errorScale).Clamp(-maxRpm, maxRpm);
+                TargetVelocityRpm = (float)(error * errorScale).Clamp(-maxRpm, maxRpm);
             }
 
             public void AddThrustGroup(ThrustGroup thrustGroup)
@@ -56,13 +60,15 @@ namespace IngameScript
                 _thrustGroups.Remove(thrustGroup);
             }
 
-            public float TargetVelocityRpm
-            {
-                get { return _rotor.TargetVelocityRPM; }
-                set { _rotor.TargetVelocityRPM = value; }
-            }
+            public float TargetVelocityRpm { get; set; }
 
             public bool IsEmpty => _thrustGroups.Count == 0;
+
+            public void Dispose()
+            {
+                _subscription.Dispose();
+                _rotor.TargetVelocityRPM = 0;
+            }
 
             private ThrustGroup GetBestThrustGroup()
             {

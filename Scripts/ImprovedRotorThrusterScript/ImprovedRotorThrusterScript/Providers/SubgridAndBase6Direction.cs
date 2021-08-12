@@ -22,43 +22,6 @@ namespace IngameScript
 {
     partial class Program
     {
-        public class NacelleProvider
-        {
-            private readonly List<IMyMotorStator> _rotorBlocks = new List<IMyMotorStator>();
-            private readonly Dictionary<IMyCubeGrid, Nacelle> _nacelleLookup = new Dictionary<IMyCubeGrid, Nacelle>();
-            private readonly IMyGridTerminalSystem _gridTerminalSystem;
-            private readonly IMyProgrammableBlock _programmableBlock;
-
-            public NacelleProvider(IMyGridTerminalSystem gridTerminalSystem, IMyProgrammableBlock programmableBlock)
-            {
-                _gridTerminalSystem = gridTerminalSystem;
-                _programmableBlock = programmableBlock;
-            }
-
-            public IEnumerable<Nacelle> GetNacelles(IEnumerable<ThrustGroup> thrustGroups)
-            {
-                _gridTerminalSystem.GetBlocksOfType(_rotorBlocks, x => x.IsWorking && x.IsSameConstructAs(_programmableBlock));
-                _nacelleLookup.Clear();
-
-                foreach (var rotor in _rotorBlocks)
-                {
-                    if (rotor.TopGrid != null)
-                        _nacelleLookup.Add(rotor.TopGrid, new Nacelle(rotor));
-                }
-
-                foreach (var thrustGroup in thrustGroups)
-                {
-                    Nacelle nacelle;
-                    if (!_nacelleLookup.TryGetValue(thrustGroup.Grid, out nacelle))
-                        continue;
-
-                    nacelle.AddThrustGroup(thrustGroup);
-                }
-
-                return _nacelleLookup.Values;
-            }
-        }
-
         public struct SubgridAndBase6Direction : IEquatable<SubgridAndBase6Direction>
         {
             public SubgridAndBase6Direction(IMyCubeGrid grid, Base6Directions.Direction direction)
