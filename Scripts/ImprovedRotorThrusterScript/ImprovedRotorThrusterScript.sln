@@ -7,13 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImprovedRotorThrusterScript
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RxSpaceEngineers", "..\..\Mixins\RxSpaceEngineers\RxSpaceEngineers\RxSpaceEngineers.shproj", "{61EBA249-19F3-48B6-A25B-A4CEE90168BA}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Algorithms", "..\..\Mixins\RxSpaceEngineers\Algorithms\Algorithms.shproj", "{A7332E43-4FF3-4762-AF2F-52FD1813EC8B}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Algorithms", "..\..\Mixins\Algorithms\Algorithms.shproj", "{A7332E43-4FF3-4762-AF2F-52FD1813EC8B}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\..\Mixins\RxSpaceEngineers\RxSpaceEngineers\RxSpaceEngineers.projitems*{61eba249-19f3-48b6-a25b-a4cee90168ba}*SharedItemsImports = 13
-		..\..\Mixins\RxSpaceEngineers\Algorithms\Algorithms.projitems*{a7332e43-4ff3-4762-af2f-52fd1813ec8b}*SharedItemsImports = 13
-		..\..\Mixins\RxSpaceEngineers\Algorithms\Algorithms.projitems*{ca1fe2ad-a0b6-4de6-b33c-b1d00a09ac8d}*SharedItemsImports = 4
+		..\..\Mixins\Algorithms\Algorithms.projitems*{a7332e43-4ff3-4762-af2f-52fd1813ec8b}*SharedItemsImports = 13
+		..\..\Mixins\Algorithms\Algorithms.projitems*{ca1fe2ad-a0b6-4de6-b33c-b1d00a09ac8d}*SharedItemsImports = 4
 		..\..\Mixins\RxSpaceEngineers\RxSpaceEngineers\RxSpaceEngineers.projitems*{ca1fe2ad-a0b6-4de6-b33c-b1d00a09ac8d}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

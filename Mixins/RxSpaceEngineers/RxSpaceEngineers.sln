@@ -14,14 +14,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Algorithms", "Algorithms\Algorithms.shproj", "{A7332E43-4FF3-4762-AF2F-52FD1813EC8B}"
-EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		RxSpaceEngineers\RxSpaceEngineers.projitems*{61eba249-19f3-48b6-a25b-a4cee90168ba}*SharedItemsImports = 13
-		Algorithms\Algorithms.projitems*{9f301418-4ba8-47f2-9d6c-16d130387eaa}*SharedItemsImports = 4
 		RxSpaceEngineers\RxSpaceEngineers.projitems*{9f301418-4ba8-47f2-9d6c-16d130387eaa}*SharedItemsImports = 4
-		Algorithms\Algorithms.projitems*{a7332e43-4ff3-4762-af2f-52fd1813ec8b}*SharedItemsImports = 13
 		RxSpaceEngineers\RxSpaceEngineers.projitems*{f5a198cb-7aec-4c86-985b-3727074a5047}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
