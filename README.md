@@ -15,10 +15,11 @@ This script offers standard vector-thrust functionality: when building a ship, s
 
 Simply place a programmable block on your ship with this script. To set the flight mode of the script, run it with one of the following arguments:
 
-%park: By default, the script will be in "park" mode. In this mode, the thrusters turn off and the rotors are locked.
-%hover: In "hover" mode, the ship will operate with full inertial dampeners.
-%cruise: In "cruise" mode, the ship will attempt to maintain a constant forward speed.
-%drift: In "drift" mode, the ship will attempt to maintain constant motion in whatever direction it was moving in when the flight control input was ceased.
+%park: By default, the script will be in "park" mode. In this mode, the thrusters turn off and the rotors are locked.<br>
+%hover: In "hover" mode, the ship will operate with full inertial dampeners.<br>
+%cruise: In "cruise" mode, the ship will attempt to maintain a constant forward speed.<br>
+%drift: In "drift" mode, the ship will attempt to maintain constant motion in whatever direction it was moving in when the flight control input was ceased.<br>
+
 
 <h3>MissileDetonatorScript</h3>
 
@@ -34,3 +35,11 @@ You can arm and disarm the script by running it with the %arm and %disarm comman
 You can adjust the threshhold at which the missile detonates by setting the "TriggerThreshhold" constant.
 
 Warning! Do NOT turn the programmable block off and on; this can lead to it erroneosly detecting a false high deceleration, which could lead to an explosion! Use the %arm and %disarm commands to enable or disable the script, respectively.
+
+<h2>Mixins</h2>
+
+<h3>RxSpaceEngineers</h3>
+This mixin is a (vastly stripped-down) version of .NET's rx observables. This is required because the IObservable&ltT&gt and IObserver&ltT&gt interfaces are not on the Space Engineers whitelist, and therefore cannot be used by in-game scripts.
+
+<h3>Algorithms</h3>
+This mixin contains a simplified implementation of the Simplex algorithm for solving linear equations. The implementation has been optimized to avoid creating excess garbage, which is important for in-game script performance. 
