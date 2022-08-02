@@ -60,7 +60,6 @@
     </None>
   </ItemGroup>
   <Import Project="..\RxSpaceEngineers\RxSpaceEngineers.projitems" Label="Shared" />
-  <Import Project="..\Algorithms\Algorithms.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
     <Copy SourceFiles="MDK\MDK.options.props" DestinationFolder="$(TargetDir)\MDK" />
